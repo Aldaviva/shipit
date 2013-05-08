@@ -15,6 +15,8 @@
 		'years'        : 'year'
 	};
 
+	var EMPTY_DATE_DIFF = _.zipObject(_.keys(SINGULARS), _.times(_.keys(SINGULARS).length, function(){ return 0; }));
+
 	function fetchNextRelease(){
 		$.getJSON("api/releases/next", function(res){
 			nextRelease = {
@@ -23,6 +25,7 @@
 			};
 
 			updateCounter();
+			updateVersion();
 		});
 	}
 
@@ -41,7 +44,7 @@
 		var fieldsToOmit = '-' + _.difference(allFields, displayedFields).join(' -');
 		var dateDifference = nextRelease.date.diff(fieldsToOmit);
 
-		_.defaults(dateDifference, _.zipObject(allFields, _.times(allFields.length, function(){ return 0; })));
+		_.defaults(dateDifference, EMPTY_DATE_DIFF);
 
 		_.omit(dateDifference, 'value', 'tense');
 
@@ -56,6 +59,10 @@
 		});
 
 		console.log(dateDifference);
+	}
+
+	function updateVersion(){
+		$('.version').text(nextRelease.version);
 	}
 
 
