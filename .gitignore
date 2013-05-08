@@ -2,3 +2,4 @@ node_modules
 *.sublime-project
 *.sublime-workspace
 config.json
+ui/styles/all.css
