@@ -1,8 +1,17 @@
 {
 	"name": "shipit",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "Ben Hutchison <ben@bluejeans.com>",
 	"dependencies": {
-	
+		"d8"             : "0.4.2",
+		"lodash"         : "1.2.0",
+		"jquery-browser" : "2.0.0-1",
+		"q"              : "0.9.3",
+		"restify"        : "2.5.0",
+		"xmldom"         : "0.1.16",
+		"xpath"          : "0.0.5"
+	},
+	"devDependencies": {
+		"less"           : "1.2.1"
 	}
 }

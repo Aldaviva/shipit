@@ -1,0 +1,10 @@
+{
+	"jira": {
+		"hostname": "jira.bluejeansnet.com",
+		"port": 8080,
+		"username": "ben",
+		"password": "",
+		"projectKey": "RVT"
+	},
+	"port": 8080
+}
