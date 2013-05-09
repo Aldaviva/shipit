@@ -1,6 +1,6 @@
 {
 	"name": "shipit",
-	"version": "0.0.2",
+	"version": "1.0.0",
 	"author": "Ben Hutchison <ben@bluejeans.com>",
 	"dependencies": {
 		"d8"             : "0.4.2",
