@@ -2,7 +2,7 @@
 
 	var nextRelease;
 	var counter = $('.counter');
-	var displayedFields = ['weeks', 'days', 'hours', 'minutes', 'seconds'];
+	var displayedFields = ['weeks', 'days', 'hours', 'minutes'];
 
 	var SINGULARS = {
 		'milliseconds' : 'millisecond',
@@ -18,19 +18,26 @@
 	var EMPTY_DATE_DIFF = _.zipObject(_.keys(SINGULARS), _.times(_.keys(SINGULARS).length, function(){ return 0; }));
 
 	function fetchNextRelease(){
-		$.getJSON("api/releases/next", function(res){
-			nextRelease = {
-				version: res.version,
-				date: new Date(res.date*1000)
-			};
+		$.ajax({
+			dataType: "json",
+			url: "api/releases/next",
+			// cache: false,
+			success: function(res){
+				nextRelease = {
+					version: res.version,
+					endDate: new Date(res.endDate*1000)
+				};
 
-			updateCounter();
-			updateVersion();
+				updateCounter();
+				updateVersion();
+			}
 		});
 	}
 
 	function firstRenderCounter(){
-		_.each(displayedFields, function(field){
+		_.each(displayedFields, function(field, idx){
+			idx && counter.append($('<hr>'));
+			
 			counter.append($('<div>', { 'class': field })
 				.append($('<div>', { 'class': 'count' }))
 				.append($('<div>', { 'class': 'label' }))
@@ -42,7 +49,7 @@
 		var allFields = _.keys(SINGULARS);
 
 		var fieldsToOmit = '-' + _.difference(allFields, displayedFields).join(' -');
-		var dateDifference = nextRelease.date.diff(fieldsToOmit);
+		var dateDifference = nextRelease.endDate.diff(fieldsToOmit);
 
 		_.defaults(dateDifference, EMPTY_DATE_DIFF);
 
@@ -68,7 +75,7 @@
 
 	firstRenderCounter();
 
-	setInterval(fetchNextRelease, 5*60*1000);
+	setInterval(fetchNextRelease, 15*60*1000);
 	fetchNextRelease();
 
 	setInterval(updateCounter, 1000);
