@@ -18,14 +18,27 @@
 	var EMPTY_DATE_DIFF = _.zipObject(_.keys(SINGULARS), _.times(_.keys(SINGULARS).length, function(){ return 0; }));
 
 	function fetchNextRelease(){
+		// nextRelease = {
+		// 	version: "Catalyst Aventador",
+		// 	endDate: new Date(2015, 3-1, 31, 12+1, 32, 0, 0)
+		// };
+        //
+		// updateCounter();
+		// updateVersion();
+
 		$.ajax({
 			dataType: "json",
+			// url: "http://releasestatus.bluejeansnet.com/sieve/cgi-bin/releases/current",
 			url: "api/releases/next",
-			// cache: false,
+			cache: false,
 			success: function(res){
 				nextRelease = {
 					version: res.version,
-					endDate: new Date(res.endDate*1000)
+					versionNumber: res.versionNumber,
+					endDate: new Date(res.endDate*1000).adjust(Date.HOUR, 12+9), //1:32 pm TODO should be 9:00 pm
+					project: res.project
+					// version: res.name,
+					// endDate: new Date(res.dates.z2)
 				};
 
 				updateCounter();
@@ -64,12 +77,10 @@
 			var labelEl = $('.label', column);
 			labelEl.text((val === 1) ? SINGULARS[key] : key);
 		});
-
-		console.log(dateDifference);
 	}
 
 	function updateVersion(){
-		$('.version').text(nextRelease.version);
+		$('.version').text(nextRelease.project + ' ' + nextRelease.version + ' ' + nextRelease.versionNumber);
 	}
 
 

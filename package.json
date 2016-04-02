@@ -3,9 +3,10 @@
 	"version": "1.0.0",
 	"author": "Ben Hutchison <ben@bluejeans.com>",
 	"dependencies": {
-		"d8"             : "0.4.2",
-		"lodash"         : "1.2.0",
+		"d8"             : "0.4.3",
 		"jquery-browser" : "2.0.0-1",
+		"lodash"         : "1.2.0",
+		"pr-request2"    : "git://github.com/aldaviva/pr-request2.git#e714437d0abc58d645028231f095196c4c1ae911",
 		"q"              : "0.9.3",
 		"restify"        : "2.5.0",
 		"xmldom"         : "0.1.16",
